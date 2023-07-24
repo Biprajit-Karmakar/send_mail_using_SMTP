@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
+
+from myproject import settings
 from .utils import send_email_to_cilent
+from django.core.mail import send_mail
 from .models import Book
 from .forms import BookForm
 
 
-def send_email(request):
-    send_email_to_cilent()
-    return redirect('/')
+# def send_email(request):
+#     send_email_to_cilent()
+#     return redirect('/')
 
 def book_list(request):
     books = Book.objects.all()
@@ -18,9 +21,19 @@ def book_detail(request, pk):
 
 def book_create(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
+        
+        
         if form.is_valid():
+            
             form.save()
+            data = (form.cleaned_data)
+            print(data)
+            subject = 'Book Created'
+            message = 'Book Details: ' + str(form.cleaned_data)
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = ['biprajitkarmakarmishon@gmail.com']
+            send_mail(subject,message, from_email,recipient_list)
             return redirect('book_list')
     else:
         form = BookForm()
