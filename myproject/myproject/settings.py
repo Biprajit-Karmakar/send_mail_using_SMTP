@@ -132,8 +132,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'd47ef74b623d59'
-EMAIL_HOST_PASSWORD = 'afdaddec22c34b'
+EMAIL_HOST_USER = 'a4df05317fe548'
+EMAIL_HOST_PASSWORD = '78eebb6972dfbd'
 EMAIL_PORT = '2525'
 
 # enable two step varification ,, and go for app password and genarate password. 
